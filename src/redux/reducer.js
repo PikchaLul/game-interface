@@ -1,85 +1,70 @@
-import { HIT_DAMAGE, CHANGE_NAME, CREATE_CHARACTER } from "./constants";
+import {
+  HIT_DAMAGE,
+  CHANGE_NAME,
+  CREATE_CHARACTER,
+  INCREMENT_STAT,
+  DECREMENT_STAT,
+} from "./constants";
+import { updateBasicCharacteristics } from "../helpers";
 
 export default (state = {}, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case CREATE_CHARACTER:
-      const {name, power, agility, intelligence, charisma} = payload;
+    case INCREMENT_STAT: {
+      const { statName } = payload;
+
+      const {
+        name,
+        parameters: { power, agility, intelligence, charisma },
+      } = state;
 
       return {
         ...state,
-        name: name,
-        stamina: 3 + +power,
-        evasion: 10 + +agility,
-        energy: +intelligence + +charisma,
-        parameters: {
-          power: {
-            name: "Сила",
-            value: +power,
-            abilities: {
-              attack: {
-                name: "Атака",
-                value: 0,
-              },
-            },
-          },
-          agility: {
-            name: "Ловкость",
-            value: +agility,
-            abilities: {
-              stealth: {
-                name: "Стелс",
-                value: 0,
-              },
-              archery: {
-                name: "Стрельба из лука",
-                value: 0,
-              },
-            },
-          },
-          intelligence: {
-            name: "Интеллект",
-            value: +intelligence,
-            abilities: {
-              learnability: {
-                name: "Обучаемость",
-                value: 0,
-              },
-              survivability: {
-                name: "Выживание",
-                value: 0,
-              },
-              medical: {
-                name: "Медицина",
-                value: 0,
-              },
-            },
-          },
-          charisma: {
-            name: "Харизма",
-            value: +charisma,
-            abilities: {
-              bullying: {
-                name: "Запугивание",
-                value: 0,
-              },
-              insight: {
-                name: "Проницательность",
-                value: 0,
-              },
-              appearance: {
-                name: "Внешний вид",
-                value: 0,
-              },
-              manipulation: {
-                name: "Манипулирование",
-                value: 0,
-              },
-            },
-          },
-        },
+        ...updateBasicCharacteristics({
+          name,
+          power: power.value,
+          agility: agility.value,
+          intelligence: intelligence.value,
+          charisma: charisma.value,
+          [statName]: (state.parameters[statName].value || 0) + 1,
+        }),
       };
+    }
+    case DECREMENT_STAT: {
+      const { statName } = payload;
+
+      const {
+        name,
+        parameters: { power, agility, intelligence, charisma },
+      } = state;
+      
+      return {
+        ...state,
+        ...updateBasicCharacteristics({
+          name,
+          power: power.value,
+          agility: agility.value,
+          intelligence: intelligence.value,
+          charisma: charisma.value,
+          [statName]: state.parameters[statName].value > 0 ? (state.parameters[statName].value || 0) - 1 : 0,
+        }),
+      };
+    }
+    case CREATE_CHARACTER: {
+      const { name, power, agility, intelligence, charisma } = payload;
+
+      return {
+        ...state,
+        ...updateBasicCharacteristics({
+          name,
+          power,
+          agility,
+          intelligence,
+          charisma,
+        }),
+      };
+    }
     case CHANGE_NAME:
       return { ...state, name: payload.name };
     case HIT_DAMAGE:

@@ -12,6 +12,7 @@ const ParametersPanel = ({
 }) => {
   const { stats, abilities } = useMemo(() => {
     const currentStats = Object.keys(parameters).map((parameter) => ({
+      key: parameter,
       name: parameters[parameter].name,
       value: parameters[parameter].value,
     }));

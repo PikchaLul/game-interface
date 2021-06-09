@@ -1,8 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import styles from "./stat.module.css";
+import { increment, decrement } from '../../redux/actions';
 
-export default function Stat(props) {
-  const { name, value, increment, decrement } = props.stat;
+const Stat = ({ name, value, increment, decrement }) => {
 
   return (
     <div className={styles.stat}>
@@ -23,3 +24,15 @@ export default function Stat(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state, props) => ({
+  name: props.stat.name || 'Базовое имя',
+  value: props.stat.value || 0,
+});
+
+const mapDispatchToProps = (dispatch, props) => ({
+  increment: () => dispatch(increment(props.stat.key)),
+  decrement: () => dispatch(decrement(props.stat.key)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Stat);

@@ -1,4 +1,11 @@
-import { HIT_DAMAGE, CHANGE_NAME, CREATE_CHARACTER, FAILED } from "./constants";
+import {
+  HIT_DAMAGE,
+  CHANGE_NAME,
+  CREATE_CHARACTER,
+  FAILED,
+  INCREMENT_STAT,
+  DECREMENT_STAT,
+} from "./constants";
 
 export const hitDamadge = (damage) => ({
   type: HIT_DAMAGE,
@@ -12,3 +19,12 @@ export const createNewCharacter = (newCharacter) => ({
 
 export const changeName = (name) =>
   name ? { type: CHANGE_NAME, payload: { name } } : { type: FAILED };
+
+export const increment = (statName) => ({
+  type: INCREMENT_STAT,
+  payload: { statName },
+});
+export const decrement = (statName) => ({
+  type: DECREMENT_STAT,
+  payload: { statName },
+});
