@@ -3,11 +3,11 @@ import Stat from '../stat';
 import Ability from '../ability';
 import styles from "./parametersPanel.module.css";
 
-export default function ParametersPanel() {
-    const {parameters} = this.props;
+export default function ParametersPanel(props) {
+    const {parameters} = props;
 
-    const [stats, abilities] = useMemo( () => {
-
+    const {stats, abilities} = useMemo(() => {
+        return {stats: [], abilities: []};
     }, [parameters])
 
     return (
