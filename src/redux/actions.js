@@ -7,7 +7,7 @@ import {
   DECREMENT_STAT,
 } from "./constants";
 
-export const hitDamadge = (damage) => ({
+export const hitDamage = (damage) => ({
   type: HIT_DAMAGE,
   payload: { damage },
 });

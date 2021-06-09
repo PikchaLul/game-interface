@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import duellist from "../../images/duellist.jpg";
-import { changeName } from "../../redux/actions";
+import { changeName, hitDamage } from "../../redux/actions";
 import styles from "./characterPanel.module.css";
 
 const CharacterPanel = ({
@@ -11,6 +11,7 @@ const CharacterPanel = ({
   evasion,
   energy,
   changeName,
+  hitDamage,
 }) => {
   return (
     <div className={styles.characterPanel}>
@@ -33,7 +34,7 @@ const CharacterPanel = ({
             <button className={styles.action} onClick={changeName}>
               Сменить имя
             </button>
-            <button className={styles.action}>Ударить</button>
+            <button className={styles.action} onClick={hitDamage}>Ударить</button>
             <button className={styles.action}>Сохранить персонажа</button>
             <button className={styles.action}>Загрузить персонажа</button>
           </div>
@@ -45,8 +46,8 @@ const CharacterPanel = ({
 
 const mapStateToProps = (state, props) => ({
   name: state.name || "Базовое имя",
-  stamina: state.stamina || 3,
-  evasion: state.evasion || 10,
+  stamina: state.stamina || 0,
+  evasion: state.evasion || 0,
   energy: state.energy || 0,
 });
 
@@ -56,6 +57,7 @@ const mapDispatchToProps = (dispatch, props) => ({
 
     return dispatch(changeName(name));
   },
+  hitDamage: () => dispatch(hitDamage(1)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CharacterPanel);

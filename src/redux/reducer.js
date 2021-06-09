@@ -38,7 +38,7 @@ export default (state = {}, action) => {
         name,
         parameters: { power, agility, intelligence, charisma },
       } = state;
-      
+
       return {
         ...state,
         ...updateBasicCharacteristics({
@@ -47,7 +47,10 @@ export default (state = {}, action) => {
           agility: agility.value,
           intelligence: intelligence.value,
           charisma: charisma.value,
-          [statName]: state.parameters[statName].value > 0 ? (state.parameters[statName].value || 0) - 1 : 0,
+          [statName]:
+            state.parameters[statName].value > 0
+              ? (state.parameters[statName].value || 0) - 1
+              : 0,
         }),
       };
     }
@@ -67,8 +70,16 @@ export default (state = {}, action) => {
     }
     case CHANGE_NAME:
       return { ...state, name: payload.name };
-    case HIT_DAMAGE:
-      return { ...state, stamina: state.stamina - payload.damage };
+    case HIT_DAMAGE: {
+      return {
+        ...state,
+        stamina:
+          state.stamina - payload.damage >= 0
+            ? state.stamina - payload.damage
+            : 0,
+      };
+    }
+
     default:
       return state;
   }
