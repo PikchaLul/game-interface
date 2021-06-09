@@ -1,0 +1,23 @@
+.initParametersForm {
+  border: 1px solid var(--grey);
+  background-color: var(--white);
+  color: var(--black);
+  transition: 0.2s all;
+  position: relative;
+  margin-bottom: 0;
+  padding: 20px 26px;
+}
+
+.formItem {
+  margin-bottom: 5px;
+}
+
+.input {
+  max-width: 70%;
+  width: 100%;
+}
+
+.create {
+  margin-top: 16px;
+  max-width: 320px;
+}

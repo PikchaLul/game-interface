@@ -1,17 +1,25 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import CharcterPanel from '../characterPanel';
 import ParametersPanel from '../parametersPanel';
 
 import styles from './app.module.css';
 
-export default class App extends React.Component {
+export default class App extends PureComponent {
+  state = {
+    showNewCharacter: true,
+  }
+
+  createNewCharacter = () => {
+    this.setState((state, props) => ({showNewCharacter: !state.showNewCharacter}))
+  }
+
   render() {
-    const {name, stamina, evasion, energy, parameters} = this.props.character;
+    const {showNewCharacter} = this.state;
 
     return (
       <div className={styles.app}>
-        <CharcterPanel character={{name, stamina, evasion, energy}}/>
-        <ParametersPanel parameters={parameters}/>
+        <CharcterPanel showNewCharacter={showNewCharacter}/>
+        <ParametersPanel showNewCharacter={showNewCharacter} createNewCharacter={this.createNewCharacter}/>
       </div>
     );
   }

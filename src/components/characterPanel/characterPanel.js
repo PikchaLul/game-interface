@@ -4,34 +4,50 @@ import duellist from "../../images/duellist.jpg";
 import { changeName } from "../../redux/actions";
 import styles from "./characterPanel.module.css";
 
-const CharcterPanel = ({ character, changeName }) => {
+const CharacterPanel = ({
+  showNewCharacter,
+  name,
+  stamina,
+  evasion,
+  energy,
+  changeName,
+}) => {
   return (
     <div className={styles.characterPanel}>
-      <div className={styles.character__name}>{character.name}</div>
+      {!showNewCharacter ? (
+        <div className={styles.character__name}>{name}</div>
+      ) : null}
       <div className={styles.character__information}>
         <div className={styles.character__container}>
           <img src={duellist} alt="duellist"></img>
-          <div className={styles.character__stats}>
-            <p>Жизненная сила: {character.stamina}</p>
-            <p>Уклонение: {character.evasion}</p>
-            <p>Энергичность: {character.energy}</p>
+          {!showNewCharacter ? (
+            <div className={styles.character__stats}>
+              <p>Жизненная сила: {stamina}</p>
+              <p>Уклонение: {evasion}</p>
+              <p>Энергичность: {energy}</p>
+            </div>
+          ) : null}
+        </div>
+        {!showNewCharacter ? (
+          <div className={styles.character__actions}>
+            <button className={styles.action} onClick={changeName}>
+              Сменить имя
+            </button>
+            <button className={styles.action}>Ударить</button>
+            <button className={styles.action}>Сохранить персонажа</button>
+            <button className={styles.action}>Загрузить персонажа</button>
           </div>
-        </div>
-        <div className={styles.character__actions}>
-          <button className={styles.action} onClick={changeName}>
-            Сменить имя
-          </button>
-          <button className={styles.action}>Ударить</button>
-          <button className={styles.action}>Сохранить пользователя</button>
-          <button className={styles.action}>Загрузить пользователя</button>
-        </div>
+        ) : null}
       </div>
     </div>
   );
 };
 
 const mapStateToProps = (state, props) => ({
-  character: {...props.character, name: state.name || props.character.name },
+  name: state.name || "Базовое имя",
+  stamina: state.stamina || 3,
+  evasion: state.evasion || 10,
+  energy: state.energy || 0,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -42,4 +58,4 @@ const mapDispatchToProps = (dispatch, props) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CharcterPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(CharacterPanel);
