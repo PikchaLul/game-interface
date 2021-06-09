@@ -1,7 +1,18 @@
 import ReactDOM from "react-dom";
-import React from 'react';
+import { Provider } from "react-redux";
+import React from "react";
+
 import "./index.css";
+
+import { character } from "./fixtures";
+
+import store from "./redux/store";
 
 import App from "./components/app/app";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Provider store={store}>
+    <App restaurants={character} />
+  </Provider>,
+  document.getElementById("root")
+);
