@@ -1,7 +1,7 @@
 export const character = {
     name: "Базовое имя",
-    stamina: 0,
-    evasion: 0,
+    stamina: 3,
+    evasion: 10,
     energy: 0,
     parameters: {
         power: {

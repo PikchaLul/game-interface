@@ -1,10 +1,10 @@
 import React from "react";
-import duellist from '../../images/duellist.jpg';
+import { connect } from "react-redux";
+import duellist from "../../images/duellist.jpg";
+import { changeName } from "../../redux/actions";
 import styles from "./characterPanel.module.css";
 
-export default function CharcterPanel(props) {
-  const { character } = props;
-
+const CharcterPanel = ({ character, changeName }) => {
   return (
     <div className={styles.characterPanel}>
       <div className={styles.character__name}>{character.name}</div>
@@ -18,11 +18,28 @@ export default function CharcterPanel(props) {
           </div>
         </div>
         <div className={styles.character__actions}>
+          <button className={styles.action} onClick={changeName}>
+            Сменить имя
+          </button>
           <button className={styles.action}>Ударить</button>
-          <button className={styles.action}>Сохранить</button>
-          <button className={styles.action}>Загрузить</button>
+          <button className={styles.action}>Сохранить пользователя</button>
+          <button className={styles.action}>Загрузить пользователя</button>
         </div>
       </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state, props) => ({
+  character: {...props.character, name: state.name || props.character.name },
+});
+
+const mapDispatchToProps = (dispatch, props) => ({
+  changeName: () => {
+    const name = prompt("Введите имя", "");
+
+    return dispatch(changeName(name));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CharcterPanel);
