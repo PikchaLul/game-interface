@@ -1,0 +1,31 @@
+.parametersPanel {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  border-left: 1px solid var(--black);
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid var(--black);
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.abilities {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid var(--black);
+  padding: 5px;
+}
+
+.title {
+  margin: 0;
+}

@@ -1,6 +1,4 @@
 import React from "react";
-import { ReactComponent as Minus } from '../../images/minus.svg';
-import { ReactComponent as Plus } from '../../images/plus.svg';
 import styles from "./stat.module.css";
 
 export default function Stat(props) {
@@ -9,24 +7,16 @@ export default function Stat(props) {
   return (
     <div className={styles.stat}>
       <div className={styles.stat__information}>
-        <p>{name}</p>
+        <h3>{name}</h3>
       </div>
       <div className={styles.counter}>
-        <div className={styles.value}>
-          {value}
-        </div>
         <div className={styles.actions}>
-          <button
-            className={styles.action}
-            onClick={decrement}
-          >
-            <Minus />
+          <button className={styles.action} onClick={decrement}>
+            -
           </button>
-          <button
-            className={styles.action}
-            onClick={increment}
-          >
-            <Plus />
+          <div className={styles.value}>{value}</div>
+          <button className={styles.action} onClick={increment}>
+            +
           </button>
         </div>
       </div>

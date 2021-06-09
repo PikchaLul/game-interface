@@ -1,0 +1,27 @@
+.stat {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.counter {
+  display: inline-flex;
+  align-items: center;
+}
+
+.value {
+  color: var(--black);
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.action {
+  margin: 0 5px;  
+  cursor: pointer;
+}

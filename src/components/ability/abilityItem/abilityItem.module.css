@@ -1,0 +1,15 @@
+.abilityItem{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.actions{
+    display: flex;
+    justify-self: right;
+}
+
+.abilityItem__level{
+    text-align: center;
+}
