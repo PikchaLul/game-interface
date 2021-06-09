@@ -1,4 +1,5 @@
 export const character = {
+    name: "",
     stamina: 0,
     evasion: 0,
     energy: 0,

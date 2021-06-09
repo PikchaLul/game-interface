@@ -1,4 +1,4 @@
-import { HIT_DAMAGE } from '../constants';
+import { HIT_DAMAGE } from './constants';
 
 export default (state = {}, action) => {
   const { type, payload } = action;

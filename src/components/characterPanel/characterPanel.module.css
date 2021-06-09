@@ -1,0 +1,40 @@
+.characterPanel {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  border-right: 1px solid black;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.character__name {
+  width: 100%;
+}
+
+.character__information {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.character__container{
+    position: relative;
+}
+
+.character__information .character__stats {
+  top: 5px;
+  left: 5px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+}
+
+.character__image {
+  width: 100%;
+  height: 525px;
+}
+
+.character__image img {
+  width: 100%;
+  height: auto;
+}
