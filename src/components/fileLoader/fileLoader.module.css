@@ -1,0 +1,11 @@
+.hidden {
+  display: none;
+}
+
+.fileLoader {
+  display: flex;
+}
+
+.action {
+  margin: 0 5px;
+}

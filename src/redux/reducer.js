@@ -5,6 +5,7 @@ import {
   INCREMENT_STAT,
   DECREMENT_STAT,
   TRAIN,
+  LOAD_CHARACTER,
 } from "./constants";
 import { updateBasicCharacteristics } from "../helpers";
 
@@ -111,6 +112,14 @@ export default (state = {}, action) => {
           },
         },
       };
+    }
+    case LOAD_CHARACTER:{
+      const {character} = payload;
+      console.log(character);
+
+      return {
+        ...character
+      }
     }
     default:
       return state;

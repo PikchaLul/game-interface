@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import duellist from "../../images/duellist.jpg";
 import { changeName, hitDamage } from "../../redux/actions";
+import FileLoader from '../fileLoader';
 import styles from "./characterPanel.module.css";
 
 const CharacterPanel = ({
@@ -35,8 +36,7 @@ const CharacterPanel = ({
               Сменить имя
             </button>
             <button className={styles.action} onClick={hitDamage}>Ударить</button>
-            <button className={styles.action}>Сохранить персонажа</button>
-            <button className={styles.action}>Загрузить персонажа</button>
+            <FileLoader/>
           </div>
         ) : null}
       </div>
