@@ -76,3 +76,14 @@ export const updateBasicCharacteristics = ({
     },
   },
 });
+
+export const calcBasicParameters = (character) => {
+  const { parameters } = character;
+
+  return {
+    ...character,
+    stamina: 3 + parameters.power.value,
+    evasion: 10 + parameters.agility.value,
+    energy: parameters.intelligence.value + parameters.agility.value,
+  };
+};
