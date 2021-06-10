@@ -40,9 +40,11 @@ const FileLoader = ({ data, loadCharacter }) => {
       loadCharacter(JSON.parse(fileContent));
     };
 
-    fileloaded = fileloaded.bind(this);
-    reader.onload = fileloaded;
-    reader.readAsText(fileObj);
+    if (fileObj) {
+      fileloaded = fileloaded.bind(this);
+      reader.onload = fileloaded;
+      reader.readAsText(fileObj);
+    }
   };
 
   return (
