@@ -5,6 +5,7 @@ import {
   FAILED,
   INCREMENT_STAT,
   DECREMENT_STAT,
+  TRAIN,
 } from "./constants";
 
 export const hitDamage = (damage) => ({
@@ -24,7 +25,13 @@ export const increment = (statName) => ({
   type: INCREMENT_STAT,
   payload: { statName },
 });
+
 export const decrement = (statName) => ({
   type: DECREMENT_STAT,
   payload: { statName },
 });
+
+export const train = ({parameterKey, abilityKey}) => ({
+    type: TRAIN,
+    payload: { parameterKey, abilityKey },
+  });

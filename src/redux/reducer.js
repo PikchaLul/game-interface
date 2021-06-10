@@ -4,6 +4,7 @@ import {
   CREATE_CHARACTER,
   INCREMENT_STAT,
   DECREMENT_STAT,
+  TRAIN,
 } from "./constants";
 import { updateBasicCharacteristics } from "../helpers";
 
@@ -14,45 +15,49 @@ export default (state = {}, action) => {
     case INCREMENT_STAT: {
       const { statName } = payload;
 
-      const {
-        name,
-        parameters: { power, agility, intelligence, charisma },
-      } = state;
-
-      return {
+      const newState = {
         ...state,
-        ...updateBasicCharacteristics({
-          name,
-          power: power.value,
-          agility: agility.value,
-          intelligence: intelligence.value,
-          charisma: charisma.value,
-          [statName]: (state.parameters[statName].value || 0) + 1,
-        }),
+        parameters: {
+          ...state.parameters,
+          [statName]: {
+            ...state.parameters[statName],
+            value: (state.parameters[statName].value || 0) + 1,
+          },
+        },
       };
+
+      newState.stamina = 3 + +newState.parameters.power.value;
+      newState.evasion = 10 + +newState.parameters.agility.value;
+      newState.energy =
+        +newState.parameters.intelligence.value +
+        +newState.parameters.agility.value;
+
+      return newState;
     }
     case DECREMENT_STAT: {
       const { statName } = payload;
 
-      const {
-        name,
-        parameters: { power, agility, intelligence, charisma },
-      } = state;
-
-      return {
+      const newState = {
         ...state,
-        ...updateBasicCharacteristics({
-          name,
-          power: power.value,
-          agility: agility.value,
-          intelligence: intelligence.value,
-          charisma: charisma.value,
-          [statName]:
-            state.parameters[statName].value > 0
-              ? (state.parameters[statName].value || 0) - 1
-              : 0,
-        }),
+        parameters: {
+          ...state.parameters,
+          [statName]: {
+            ...state.parameters[statName],
+            value:
+              state.parameters[statName].value > 0
+                ? (state.parameters[statName].value || 0) - 1
+                : 0,
+          },
+        },
       };
+
+      newState.stamina = 3 + +newState.parameters.power.value;
+      newState.evasion = 10 + +newState.parameters.agility.value;
+      newState.energy =
+        +newState.parameters.intelligence.value +
+        +newState.parameters.agility.value;
+
+      return newState;
     }
     case CREATE_CHARACTER: {
       const { name, power, agility, intelligence, charisma } = payload;
@@ -79,7 +84,34 @@ export default (state = {}, action) => {
             : 0,
       };
     }
-
+    case TRAIN: {
+      const { parameterKey, abilityKey } = payload;
+      console.log(parameterKey, abilityKey);
+      return {
+        ...state,
+        parameters: {
+          ...state.parameters,
+          [parameterKey]: {
+            ...state.parameters[parameterKey],
+            abilities: {
+              ...state.parameters[parameterKey].abilities,
+              [abilityKey]: {
+                ...state.parameters[parameterKey].abilities[abilityKey],
+                value:
+                  state.parameters[parameterKey].abilities[abilityKey].value <
+                    5 &&
+                  state.parameters[parameterKey].value >
+                    state.parameters[parameterKey].abilities[abilityKey].value
+                    ? state.parameters[parameterKey].abilities[abilityKey]
+                        .value + 1
+                    : state.parameters[parameterKey].abilities[abilityKey]
+                        .value,
+              },
+            },
+          },
+        },
+      };
+    }
     default:
       return state;
   }

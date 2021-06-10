@@ -18,9 +18,11 @@ const ParametersPanel = ({
     }));
 
     const currentAbilities = Object.keys(parameters).map((parameter) => ({
+      parameterKey: parameter,
       abilitiesClass: parameters[parameter].name,
       abilities: Object.keys(parameters[parameter].abilities).map(
         (ability) => ({
+          key: ability,
           name: parameters[parameter].abilities[ability].name,
           value: parameters[parameter].abilities[ability].value,
         })
