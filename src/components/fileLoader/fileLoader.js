@@ -56,10 +56,7 @@ const FileLoader = ({ data, loadCharacter }) => {
         className={styles.hidden}
         download="states.json"
         href={fileDownloadUrl}
-        ref={(e) => {
-          console.log(e);
-          return setDofileDownload(e);
-        }}
+        ref={(e) => setDofileDownload(e)}
       >
         Скачать
       </a>

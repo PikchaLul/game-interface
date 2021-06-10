@@ -87,7 +87,7 @@ export default (state = {}, action) => {
     }
     case TRAIN: {
       const { parameterKey, abilityKey } = payload;
-      console.log(parameterKey, abilityKey);
+      
       return {
         ...state,
         parameters: {
@@ -115,7 +115,6 @@ export default (state = {}, action) => {
     }
     case LOAD_CHARACTER:{
       const {character} = payload;
-      console.log(character);
 
       return {
         ...character
